@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+<body>
+<script>
+    if('geolocation' in navigator) {
+    console.log('geolocation is available');
+    navigator.geolocation.getCurrentPosition(async position => {
+        console.log(position.coords.latitude, position.coords.longitude);
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const data = {lat, lon};
+
+        const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        };
+
+        const response = await fetch ('/api', options);
+        const jsonData = await response.json();
+        console.log(jsonData);
+
+        });
+    } else {
+    console.log('geolocation IS NOT available');
+    }
+</script>
+<h1>HIIIII World</h1>
+<input type="text" id="name" value="">
+<button onclick="newEntry()">Submit</button>
+
+</body>
+</html>
